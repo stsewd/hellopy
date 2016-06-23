@@ -1,7 +1,5 @@
 from wit import Wit
-import shutil
-import subprocess
-import time
+from . import actions as act
 from . import text_to_speech as tts
 from . import config
 
@@ -43,29 +41,10 @@ def converse(msg):
     client.run_actions(session_id, msg)
 
 
-def open_app(session_id, context):
-    app = context['app']
-    path_app = shutil.which(app)
-    if path_app:
-        tts.talk(app + " encontrado")
-        subprocess.call([path_app])
-    else:
-        tts.talk(app + " no encontrado")
-    return context
-
-
-def mute(session_id, context):
-    tts.talk('silencio')
-    time.sleep(2)
-    subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "0%"])
-    context['state'] = 'shh!'
-    return context
-
-
 actions = {
     'say': say,
     'error': error,
     'merge': merge,
-    'open_app': open_app,
-    'mute': mute,
+    'open_app': act.open_app,
+    'mute': act.mute,
 }
