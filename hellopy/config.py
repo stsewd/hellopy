@@ -1,8 +1,8 @@
 """ Global configurations
 """
 
-USER = 'test'
-WIT_AI_KEY = '3MY6TFVDNPTDKCDER4OMC3F67YEKXRGO'
+USER = 'user'
+WIT_AI_KEY = 'your wit key'
 LANGUAGE_UNICODE = 'es'
 LANGUAGE = 'Es-es'
 RECORD_DURATION = 5

@@ -12,7 +12,7 @@ def say(session_id, context, msg):
 
 
 def error(session_id, context, e):
-    tts.talk("Ups, algo salió mal.")
+    # tts.talk("Algo salió mal.")
     print(str(e))
 
 
@@ -20,9 +20,9 @@ def merge(session_id, context, entities, msg):
     return context
 
 
-def converse(msj):
+def converse(msg):
     client = Wit(WIT_AI_KEY, actions)
-    client.run_actions(session_id, msj)
+    client.run_actions(session_id, msg)
 
 
 actions = {
