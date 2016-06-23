@@ -16,7 +16,7 @@ def listen():
         audio = record(r, duration)
         print("Reconociendo...")
         text = r.recognize_wit(audio, key=WIT_AI_KEY)
-        tts.talk(text)
+        return text
     except sr.UnknownValueError:
         tts.talk("No te entiendo")
     except sr.RequestError as e:
