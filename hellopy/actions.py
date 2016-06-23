@@ -1,3 +1,5 @@
+import sys
+import os
 import shutil
 import subprocess
 import threading
@@ -28,3 +30,14 @@ def mute(session_id, context):
     context['state'] = 'shh!'
     return context
 
+
+def unmute(session_id, context):
+    subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "50%"])
+    context['state'] = 'Hola, de nuevo!'
+    return context
+
+
+def off(session_id, context):
+    tts.talk("Adiós")
+    time.sleep(2)
+    os._exit(0)

@@ -33,6 +33,9 @@ def merge(session_id, context, entities, msg):
 
     silence = first_entity_value(entities, 'mute')
     if silence: context['mute'] = silence
+
+    unsilence = first_entity_value(entities, 'unmute')
+    if unsilence: context['unmute'] = unsilence
     return context
 
 
@@ -47,4 +50,6 @@ actions = {
     'merge': merge,
     'open_app': act.open_app,
     'mute': act.mute,
+    'unmute': act.unmute,
+    'off': act.off,
 }
