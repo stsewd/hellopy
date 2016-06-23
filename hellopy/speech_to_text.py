@@ -26,5 +26,5 @@ def listen():
 def record(r, duration):
     with sr.Microphone() as source:
         print("Escuchando...")
-        audio = r.record(source, duration=duration)
+        audio = r.listen(source) if duration == 0 else r.record(source, duration=duration)
     return audio
