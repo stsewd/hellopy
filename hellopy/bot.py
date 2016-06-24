@@ -3,6 +3,7 @@ from . import actions as act
 from . import text_to_speech as tts
 from . import config
 
+CONTEXT_CONVERSE = None
 
 WIT_AI_KEY = config.WIT_AI_KEY
 session_id = config.USER
@@ -37,12 +38,19 @@ def merge(session_id, context, entities, msg):
     unsilence = first_entity_value(entities, 'unmute')
     if unsilence: context['unmute'] = unsilence
 
+    write = first_entity_value(entities, 'write')
+    if write: context['write'] = write
+
+    game = first_entity_value(entities, 'game')
+    if game: context['game'] = game
+
+    CONTEXT_CONVERSE = context
     return context
 
 
 def converse(msg):
     client = Wit(WIT_AI_KEY, actions)
-    client.run_actions(session_id, msg)
+    client.run_actions(session_id, msg, CONTEXT_CONVERSE)
 
 
 actions = {
@@ -55,4 +63,6 @@ actions = {
     'off': act.off,
     'default': act.default,
     'age': act.age,
+    'write': act.write,
+    'game': act.game,
 }

@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import threading
 import time
+import pyperclip
 from . import text_to_speech as tts
 
 
@@ -46,11 +47,34 @@ def off(session_id, context):
 
 def get_age():
     age_ = datetime.datetime.now() - config.BIRTH
-    return str(age_.days) + " dias " + str(age_.seconds) + " segundos"
+    hours = age_.seconds//3600.0
+    minutes = int((age_.seconds/3600.0 - hours)*60)
+    seconds = 0 # (minutes/60.0 - minutes)
+    return str(age_.days) + " dias " + \
+           str(hours) + " horas " + \
+           str(round(minutes, 3)) + " minutos " + \
+           str(round(seconds, 3)) + " segundos "
 
 
 def age(session_id, context):
     context['age'] = get_age()
+    return context
+
+
+def write(session_id, context):
+    pyperclip.copy(context['write'])
+    return context
+
+
+def game(session_id, context):
+    rol = context['game']
+    if rol == 'piedra':
+        rol = 'papel'
+    elif rol == 'papel':
+        rol = 'tijera'
+    elif rol == 'tijera':
+        rol = 'piedra'
+    context['game'] = rol
     return context
 
 
