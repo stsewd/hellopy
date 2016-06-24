@@ -1,4 +1,5 @@
-import sys
+from . import config
+import datetime
 import os
 import shutil
 import subprocess
@@ -41,3 +42,18 @@ def off(session_id, context):
     tts.talk("Adiós")
     time.sleep(2)
     os._exit(0)
+
+
+def get_age():
+    age_ = datetime.datetime.now() - config.BIRTH
+    return str(age_.days) + " dias " + str(age_.seconds) + " segundos"
+
+
+def age(session_id, context):
+    context['age'] = get_age()
+    return context
+
+
+def default(session_id, context):
+    context['default'] = 'Preguntale a google'
+    return context
