@@ -3,8 +3,6 @@ from . import actions as act
 from . import text_to_speech as tts
 from . import config
 
-CONTEXT_CONVERSE = None
-
 WIT_AI_KEY = config.WIT_AI_KEY
 session_id = config.USER
 
@@ -44,13 +42,12 @@ def merge(session_id, context, entities, msg):
     game = first_entity_value(entities, 'game')
     if game: context['game'] = game
 
-    CONTEXT_CONVERSE = context
     return context
 
 
 def converse(msg):
     client = Wit(WIT_AI_KEY, actions)
-    client.run_actions(session_id, msg, CONTEXT_CONVERSE)
+    client.run_actions(session_id, msg)
 
 
 actions = {
