@@ -3,7 +3,7 @@ pocketsphinx==0.1.0
 PyAudio==0.2.9
 pycparser==2.14
 pyperclip==1.5.27
-requests==2.10.0
+requests==2.20.0
 sounddevice==0.3.3
 SpeechRecognition==3.4.6
 wit==3.5.0
